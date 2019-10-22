@@ -16,9 +16,12 @@ body, html {
     background-color: #40deadff;
 }
 
+.bg-black {
+    background-color: rgb(44, 44, 44);
+}
+
 .jumbotron {
     margin: 0;
-
 }
 
 @media (min-width: 576px) {
@@ -27,6 +30,13 @@ body, html {
 }
 }
 
+.navabsolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    width: 100%;
+}
 
 .thriveCarouselContainer {
     width: 85%;
@@ -34,7 +44,7 @@ body, html {
 }
 
 .background {
-    background-image: url("img/image1.png");
+    background-image: url("img/thrive1.jpg");
     background-color: beige;
     height: 100%;
     background-position: center;
@@ -44,6 +54,9 @@ body, html {
 }
 
 .layer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     z-index: 14;
     width: 100%;
@@ -51,6 +64,11 @@ body, html {
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.582);
+}
+
+.hero-logo {
+    font-size: 50px;
+    color: #ffb0b9ff;
 }
 
 .toggle-dropdown {
