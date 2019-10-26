@@ -1,0 +1,53 @@
+.c-form {
+  margin: 5rem auto;
+  display: flex;
+  position: relative;
+  height: 50vh;
+  &__img {
+    transition: all 3s;
+    margin: auto;
+    filter: blur(2px);
+    z-index: 1;
+    background-color: beige;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 50%;
+    height: 100%;
+    &--flipping {
+      animation: flipImage 1s ease-in-out 0s normal forwards;
+    }
+  }
+  &__button {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
+  &__input {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    background-color:rgb(223, 226, 230);
+    padding: 5rem;
+  }
+}
+
+@keyframes flipImage {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    transform: scaleX(-1);
+  }
+  100% {
+    transform: scaleX(-1);
+    opacity: 0;
+  }
+}

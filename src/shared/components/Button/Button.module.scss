@@ -1,0 +1,21 @@
+.o-button {
+  backface-visibility: hidden;
+  outline: none;
+  margin: auto;
+  padding: 1.5rem 5rem;
+  transition: transform .2s;
+  border-radius: 100px;
+  background-color: #bee9fcff;
+  &:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+    cursor: pointer;
+    background-color: rgb(180, 223, 241);
+  }
+  &:active {
+    border-width: 0;
+    background-color: rgb(170, 210, 228);
+  }
+  &:focus {
+    outline: none 0px transparent;
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import rootReducer from './redux/rootReducer'
 
@@ -11,11 +12,11 @@ export const store = createStore(rootReducer, applyMiddleware(thunk))
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <LaunchHero />
       <Navigator />
       <NavigatorContent />
-    </>
+    </Provider>
   )
 }
 
