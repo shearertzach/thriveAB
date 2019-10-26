@@ -6,8 +6,8 @@ const LaunchHero = () => (
     <img
       className={style['o-hero__container__image']}
       src={require('../../shared/assets/thrive1.jpg')}
-      
     />
+    <div className={style['o-hero__container__overlay']} />
   </div>
 )
 
