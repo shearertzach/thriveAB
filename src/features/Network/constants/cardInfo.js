@@ -6,7 +6,8 @@ export const cardInfo = [
     info1: ' 4835 Poplar Level Rd #110 Louisville, KY 40213',
     info2: 'aljshdflkjsh',
     info3: 'kljahsdkfljh',
-    website: 'Kentucky Counseling Center'
+    website: 'Kentucky Counseling Center',
+    webLink: 'https://kentuckycounselingcenter.com/'
   },
   {
     img: `${require('../../../shared/assets/image1.png')}`,

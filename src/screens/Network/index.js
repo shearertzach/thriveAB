@@ -20,6 +20,7 @@ class Network extends PureComponent {
                 info2={card.info2}
                 info3={card.info3}
                 website={card.website}
+                webLink={card.webLink}
               />
             ))
           }
