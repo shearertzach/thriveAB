@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Button } from '../../../../shared/components'
+import { Button, Input } from '../../../../shared/components'
 import style from './AuthorizationForm.module.scss'
 import classnames from 'classnames'
 
@@ -18,9 +18,9 @@ class AuthorizationForm extends PureComponent {
     <div className={style['c-form__input']}>
       <div className={style['c-form__input__form']}>
         <p>Username:</p>
-        <input type='username' />
+        <Input type='username' />
         <p>Password:</p>
-        <input type='password' />
+        <Input type='password' />
       </div>
     </div>
   )
