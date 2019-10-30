@@ -9,19 +9,26 @@ class AuthorizationForm extends PureComponent {
     this.state = {
       flipping: false,
       flipped: false,
-      username: '',
+      email: '',
       password: ''
     }
   }
 
+  handleTextChange = (text, key) => {
+    this.setState({ [key]: text.target.value })
+  }
+
   renderFlippedForm = () => (
     <div className={style['c-form__input']}>
-      <div className={style['c-form__input__form']}>
-        <p>Username:</p>
-        <Input type='username' />
-        <p>Password:</p>
-        <Input type='password' />
+      <div className={style['c-form__input__section']}>
+        <p>Email:</p>
+        <Input onChange={(text) => this.handleTextChange(text, 'email') } type='email' />
       </div>
+      <div className={style['c-form__input__section']}>
+        <p style={{ marginTop: '2rem' }}>Password:</p>
+        <Input onChange={(text) => this.handleTextChange(text, 'password')} type='password' />
+      </div>
+      <Button title='Login' />
     </div>
   )
 
