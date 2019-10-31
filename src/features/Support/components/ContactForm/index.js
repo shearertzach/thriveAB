@@ -3,7 +3,7 @@ import style from './ContactForm.module.scss'
 
 const ContactForm = () => (
   <div className={style['o-contactForm']}>
-    <h1 className={style['o-contactForm__header']}>Contact Us!</h1>
+    <h1 className={style['o-contactForm__header']}>Contact Us if You Would Like In-Network Support!</h1>
     <div className={style['o-contactForm__form']}>
       <div className={style['o-contactForm__form__main']}>
         <textarea className={style['o-contactForm__form__main__nameField']} placeholder='Full Name' />

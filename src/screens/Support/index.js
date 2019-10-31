@@ -11,7 +11,7 @@ class Support extends PureComponent {
         <InfoSection>
           <SubHeader
             title='Support'
-            subtitle='Monitoring your health with a daily self-assessment utilizing the Edinburgh Postnatal Depression Scale.'
+            subtitle='Reach Out and Discover Helpful Solutions.'
           />
           <SupportVideo video={require('../../shared/assets/Summer.mp4')} />
           <div className={style['c-duo-video-container']}>
