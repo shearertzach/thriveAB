@@ -3,15 +3,17 @@
   border-radius: 10px;
   background-color: white;
   width: 35rem;
+  text-align: center;
 
 
   &__img {
-    width: 35rem;
-
-    border-radius: 10px 10px 0px 0px;
+    height: 220px;
+    margin: 0 auto;
+   
   }
 
   &__title {
+    border-top: 1px solid black;
     padding: 10px;
     font-size: 19px;
     padding-bottom: 3px;
@@ -30,5 +32,15 @@
     font-size: 13px;
   }
 
+  &__link {
+    margin: 4px;
+    text-decoration: none;
+    font-size: 15px;
+  }
+
 }
 
+.c-linkContainer {
+  padding: 10px;
+  border-top: 1px solid black;
+}
