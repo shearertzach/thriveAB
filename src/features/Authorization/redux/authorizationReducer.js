@@ -1,7 +1,7 @@
 import * as types from './authorizationTypes';
 
 const INITIAL_STATE = {
-  loggedIn: false,
+  loggedIn: true,
   meta: {
     loggingIn: false,
     error: ''
