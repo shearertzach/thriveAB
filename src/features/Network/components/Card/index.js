@@ -9,7 +9,9 @@ const Card = ({ img, title, subtitle, info1, info2, info3, website, webLink }) =
     <p className={style['o-card__info']}>{info1}</p>
     <p className={style['o-card__info']}>{info2}</p>
     <p className={style['o-card__info']}>{info3}</p>
-    <a href={webLink}>{website}</a>
+    <div className={style['c-linkContainer']}>
+      <a href={webLink} className={style['o-card__link']}>{website}</a>
+    </div>
   </div>
 )
 

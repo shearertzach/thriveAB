@@ -1,10 +1,10 @@
 import React from 'react'
 import style from './SupportVideo.module.scss'
 
-const SupportVideo = () => (
+const SupportVideo = ({ video }) => (
   <div className={style['o-supportVideo']}>
     <video className={style['o-supportVideo__video']} controls>
-      <source src={require('../../../../shared/assets/Summer.mp4')} type='video/mp4' />
+      <source src={video} type='video/mp4' />
     </video>
   </div>
 )

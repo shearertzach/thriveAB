@@ -1,0 +1,95 @@
+.o-contactForm {
+  width: 100%;
+
+  &__header {
+    text-align: center;
+    font-size: 35px;
+  }
+
+  &__form {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+
+    &__main {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 40%;
+      align-items: center;
+
+      &__nameField {
+        height: 45px;
+        width: 95%;
+        margin: 10px 1px;
+        padding: 5px 5px;
+        resize: none;
+        border-radius: 6px;
+      }
+      &__subjectField {
+        height: 45px;
+        width: 95%;
+        margin: 10px 1px;
+        padding: 5px 5px;
+        resize: none;
+        border-radius: 6px;
+      }
+      &__emailField {
+        height: 45px;
+        width: 95%;
+        margin: 10px 1px;
+        padding: 5px 5px;
+        resize: none;
+        border-radius: 6px;
+      }
+    }
+
+    &__bodyField {
+      width: 50%;
+      height: 200px;
+      margin: 10px auto;
+      padding: 5px 5px;
+      resize: none;
+      border-radius: 6px;
+      
+    }
+
+
+  }
+  @media only screen and (max-width: 750px) {
+    &__form {
+      flex-direction: column;
+      width: 100%;
+
+      &__main {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+  
+        &__nameField {
+          height: 45px;
+          width: 70%;
+        }
+        &__subjectField {
+          height: 45px;
+          width: 70%;
+        }
+        &__emailField {
+          height: 45px;
+          width: 70%;
+        }
+      }
+  
+      &__bodyField {
+        width: 70%;
+        height: 250px;
+      }
+    }
+  }
+}
+
+
