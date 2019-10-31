@@ -1,0 +1,156 @@
+[
+  {
+    "question": "I have been able to laugh and see the funny side of things",
+    "answers": 
+    [
+      {
+        "text": "As much as I always could",
+        "points": 0
+      },
+      {
+        "text": "Not quite so much now",
+        "points": 1
+      },
+      {
+        "text": "Definitely not so much now",
+        "points": 2
+      },
+      {
+        "text": "Not at all",
+        "points": 3
+      }
+    ] 
+  },
+  {
+    "question": "I have looked forward with enjoyment to things",
+    "answers": 
+    [
+      {
+        "text": "As much as I ever did",
+        "points": 0
+      },
+      {
+        "text": "Rather less than I used to",
+        "points": 1
+      },
+      {
+        "text": "Definitely less than I used to",
+        "points": 2
+      },
+      {
+        "text": "Hardly at all",
+        "points": 4
+      }
+    ]
+  },
+  {
+    "question": "I have blamed myself unnecessarily when things  went wrong",
+    "answers":
+    [
+      {
+        "text": "Yes, most of the time",
+        "points": 3
+      },
+      {
+        "text": "Yes, some of the time ",
+        "points": 2
+      },
+      {
+        "text": "Not very often",
+        "points": 1
+      },
+      {
+        "text": "No, never",
+        "points": 0
+      }
+    ]
+  },
+  {
+    "question": "I have been anxious or worried for no good reason",
+    "answers": 
+    [
+      {
+        "text": "No, not at all",
+        "points": 0
+      },
+      {
+        "text": "Hardly ever",
+        "points": 1
+      },
+      {
+        "text": "Yes, sometimes",
+        "points": 2
+      },
+      {
+        "text": "Yes, very often",
+        "points": 3
+      }
+    ]
+  },
+  {
+    "question": "I have felt scared or panicky for no very good reason",
+    "answers":
+    [
+      {
+        "text": "Yes, quite a lot",
+        "points": 3
+      },
+      {
+        "text": "Yes, sometimes",
+        "points": 2
+      },
+      {
+        "text": "No, not much",
+        "points": 1
+      },
+      {
+        "text": "No, not at all",
+        "points": 0
+      }
+    ]
+  },
+  {
+    "question": "Things have been getting on top of me",
+    "answers":
+    [
+      {
+        "text": "Yes, most of the time I haven't been able to cope at all.",
+        "points": 3
+      },
+      {
+        "text": "Yes, sometimes I haven't been coping as well as usual.",
+        "points": 2
+      },
+      {
+        "text": "No, most of the time I have coped quite well.",
+        "points": 1
+      },
+      {
+        "text": "No, I have been coping as well as ever.",
+        "points": 0
+      }
+    ]
+  },
+  {
+    "question": "I have been so unhappy that I have had difficulty sleeping",
+    "answers": 
+    [
+      {
+        "text": "Yes, most of the time",
+        "points": 3
+      },
+      {
+        "text": "Yes, sometimes",
+        "points": 2
+      },
+      {
+        "text": "Not very often",
+        "points": 1
+      },
+      {
+        "text": "No, not at all",
+        "points": 0
+      }
+    ]
+  }
+]
