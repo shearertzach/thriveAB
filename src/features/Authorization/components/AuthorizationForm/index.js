@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { userSignIn } from '../../redux/authorizationActions'
 import { Button, Input } from '../../../../shared/components'
 import style from './AuthorizationForm.module.scss'
 import classnames from 'classnames'
@@ -28,7 +30,12 @@ class AuthorizationForm extends PureComponent {
         <p style={{ marginTop: '2rem' }}>Password:</p>
         <Input onChange={(text) => this.handleTextChange(text, 'password')} type='password' />
       </div>
-      <Button title='Login' />
+      <p style={{ color: 'red', alignSelf: 'center' }}>{this.props.error}</p>
+      <Button
+        disabled={this.props.loggingIn}
+        onClick={() => this.props.userSignIn(this.state.email, this.state.password)}
+        title='Login'
+      />
     </div>
   )
 
@@ -65,4 +72,10 @@ class AuthorizationForm extends PureComponent {
   }
 }
 
-export default AuthorizationForm
+const mapStateToProps = ({ authorization }) => {
+  const { meta } = authorization
+  const { error, loggingIn } = meta
+  return { error, loggingIn }
+}
+
+export default connect(mapStateToProps, { userSignIn })(AuthorizationForm)
