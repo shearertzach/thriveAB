@@ -17,8 +17,11 @@ class Survey extends Component {
   }
 
   handleNextPress = () => {
-    const { currentIndex } = this.state
+    const { currentIndex, savedAnswers } = this.state
+    console.log(savedAnswers)
+    const { submitTrackerSurveyData } = this.props
     if (currentIndex + 1 === surveyQuestions.length) {
+      submitTrackerSurveyData(savedAnswers)
       this.setState({ hasSubmitted: true })
       return
     }
@@ -87,4 +90,4 @@ class Survey extends Component {
   }
 }
 
-export default Survey
+export default connect(null, { submitTrackerSurveyData })(Survey)

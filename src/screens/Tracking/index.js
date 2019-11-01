@@ -4,12 +4,13 @@ import style from './Tracking.module.scss'
 import { SubHeader, InfoSection } from '../../shared/components'
 import AuthorizationForm from '../../features/Authorization/components/AuthorizationForm'
 import Survey from '../../features/Tracking/components/Survey'
+import Graph from '../../features/Tracking/components/Graph'
 
 class Tracking extends PureComponent {
   renderAuthorized = () => (
     <InfoSection extraStyle={style['o-tracker']}>
       <Survey />
-      <div style={{ width: '50%'}} />
+      <Graph />
     </InfoSection>
   )
 
