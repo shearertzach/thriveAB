@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import style from './Survey.module.scss'
 import surveyQuestions from '../../constants/surveyQuestions.json'
 import classnames from 'classnames'
+import { submitTrackerSurveyData } from '../../redux/trackerActions'
 
 class Survey extends Component {
   constructor(props) {
@@ -9,7 +11,8 @@ class Survey extends Component {
     this.state = {
       currentIndex: 0,
       selectedAnswerIndex: -1,
-      hasSubmitted: false
+      hasSubmitted: false,
+      savedAnswers: []
     }
   }
 
@@ -25,8 +28,23 @@ class Survey extends Component {
     })
   }
 
+  componentDidUpdate() {
+    const { savedAnswers, selectedAnswerIndex, currentIndex } = this.state
+    if (savedAnswers[currentIndex]) {
+      if (selectedAnswerIndex !== savedAnswers[currentIndex].index) {
+        this.setState({ selectedAnswerIndex: savedAnswers[currentIndex].index })
+      }
+    }
+  }
+
+  handleAnswerPress = (points, index) => {
+    const { currentIndex } = this.state
+    const savedAnswers = [...this.state.savedAnswers]
+    savedAnswers[currentIndex] = { points, index }
+    this.setState({ selectedAnswerIndex: index, savedAnswers })
+  }
+
   render() {
-    console.log(surveyQuestions)
     // TODO: - Make this time based using moment. One survey per day.
     const { currentIndex, selectedAnswerIndex, hasSubmitted } = this.state
     if (hasSubmitted) return <h2 className={style['c-survey__title']}>Thank you for taking the Survey</h2>
@@ -38,7 +56,7 @@ class Survey extends Component {
           {
             surveyQuestions[currentIndex].answers.map((answer, index) => (
               <div
-                onClick={() => this.setState({ selectedAnswerIndex: index })}
+                onClick={() => this.handleAnswerPress(answer.points, index)}
                 key={answer.text}
                 className={classnames(style['c-survey__answers__answer'],
                   selectedAnswerIndex === index ? style['c-survey__answers__answer--selected'] : '')}

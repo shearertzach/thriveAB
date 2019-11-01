@@ -13,7 +13,10 @@ export const userSignIn = (email, password) => async (dispatch) => {
     console.log(e)
     if (e.code.includes('auth/user-not-found')) {
       await firebase.auth().createUserWithEmailAndPassword(email, password)
-      await firebase.auth().signInWithEmailAndPassword(email, password)
+      const response = await firebase.auth().signInWithEmailAndPassword(email, password)
+      const fbToken = await response.user.getIdToken()
+      const userId = response.user.uid
+      dispatch(userSignInSuccess({ fbToken, userId }))
       return
     }
     dispatch(userSignInFailed(e.message))

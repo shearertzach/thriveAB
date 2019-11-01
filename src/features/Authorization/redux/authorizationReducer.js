@@ -1,7 +1,8 @@
-import * as types from './authorizationTypes';
+import * as types from './authorizationTypes'
 
 const INITIAL_STATE = {
   loggedIn: false,
+  user: {},
   meta: {
     loggingIn: false,
     error: ''
@@ -25,6 +26,7 @@ export default (state = INITIAL_STATE, action ) => {
       return {
         ...state,
         loggedIn: true,
+        user: action.payload,
         meta: {
           ...state.meta,
           loggingIn: false,
