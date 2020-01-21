@@ -2,6 +2,7 @@ import * as types from './authorizationTypes'
 
 const INITIAL_STATE = {
   loggedIn: false,
+  userID: 0,
   user: {},
   meta: {
     loggingIn: false,
