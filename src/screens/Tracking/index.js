@@ -28,20 +28,24 @@ class Tracking extends PureComponent {
   )
 
   render() {
-    const { loggedIn } = this.props
+    const { loggedIn, user } = this.props
     if (loggedIn) {
+      console.log(user)
       return this.renderAuthorized()
     } else return this.renderUnAuthorized()
   }
 }
 
 Tracking.propTypes = {
-  loggedIn: PropTypes.bool
+  loggedIn: PropTypes.bool,
+  user: PropTypes.object
+
 }
 
 const mapStateToProps = ({ authorization }) => {
   const { loggedIn } = authorization
-  return { loggedIn }
+  const { user } = authorization
+  return { loggedIn, user }
 }
 
 export default connect(mapStateToProps, null)(Tracking)
