@@ -12,7 +12,8 @@ class Survey extends Component {
       currentIndex: 0,
       selectedAnswerIndex: -1,
       hasSubmitted: false,
-      savedAnswers: []
+      savedAnswers: [],
+      totalPoints: 0
     }
   }
 
@@ -20,8 +21,17 @@ class Survey extends Component {
     const { currentIndex, savedAnswers } = this.state
     console.log(savedAnswers)
     const { submitTrackerSurveyData } = this.props
+    let total = 0
     if (currentIndex + 1 === surveyQuestions.length) {
+      for (const q in savedAnswers) {
+        console.log(savedAnswers[q].points)
+        total += savedAnswers[q].points
+      }
+      console.log(total)
+      savedAnswers.push(total)
       submitTrackerSurveyData(savedAnswers)
+      console.log(savedAnswers)
+      console.log("Questions Submitted!")
       this.setState({ hasSubmitted: true })
       return
     }
@@ -40,14 +50,16 @@ class Survey extends Component {
     }
   }
 
-  handleAnswerPress = (points, index) => {
+  handleAnswerPress = (points, index, day) => {
     const { currentIndex } = this.state
     const savedAnswers = [...this.state.savedAnswers]
-    savedAnswers[currentIndex] = { points, index }
+    savedAnswers[currentIndex] = { points, index, day }
     this.setState({ selectedAnswerIndex: index, savedAnswers })
   }
 
   render() {
+    let date = new Date()
+    let today = date.getDate()
     // TODO: - Make this time based using moment. One survey per day.
     const { currentIndex, selectedAnswerIndex, hasSubmitted } = this.state
     if (hasSubmitted) return <h2 className={style['c-survey__title']}>Thank you for taking the Survey</h2>
@@ -59,7 +71,7 @@ class Survey extends Component {
           {
             surveyQuestions[currentIndex].answers.map((answer, index) => (
               <div
-                onClick={() => this.handleAnswerPress(answer.points, index)}
+                onClick={() => this.handleAnswerPress(answer.points, index, today)}
                 key={answer.text}
                 className={classnames(style['c-survey__answers__answer'],
                   selectedAnswerIndex === index ? style['c-survey__answers__answer--selected'] : '')}

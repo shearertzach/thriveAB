@@ -5,13 +5,16 @@ import { SubHeader, InfoSection } from '../../shared/components'
 import AuthorizationForm from '../../features/Authorization/components/AuthorizationForm'
 import Survey from '../../features/Tracking/components/Survey'
 import Graph from '../../features/Tracking/components/Graph'
+import { PropTypes } from 'prop-types'
 
 class Tracking extends PureComponent {
   renderAuthorized = () => (
-    <InfoSection extraStyle={style['o-tracker']}>
-      <Survey />
-      <Graph />
-    </InfoSection>
+    <div>
+      <InfoSection extraStyle={style['o-tracker']}>
+        <Survey />
+        <Graph />
+      </InfoSection>
+    </div>
   )
 
   renderUnAuthorized = () => (
@@ -30,6 +33,10 @@ class Tracking extends PureComponent {
       return this.renderAuthorized()
     } else return this.renderUnAuthorized()
   }
+}
+
+Tracking.propTypes = {
+  loggedIn: PropTypes.bool
 }
 
 const mapStateToProps = ({ authorization }) => {
