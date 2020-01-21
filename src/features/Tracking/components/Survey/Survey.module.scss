@@ -1,0 +1,50 @@
+.c-survey {
+  &__title {
+    font-size: 2.4rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  &__subtitle {
+    width: 55rem;
+    height: 5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 2rem 0 1rem;
+  }
+  &__answers {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 30rem;
+    &__answer {
+      display: flex;
+      background-color: grey;
+      color: white;
+      font-size: 1.2rem;
+      width: 30rem;
+      margin: .5rem 0;
+      padding: 2rem;
+      &:hover {
+        cursor: pointer;
+      }
+      &--selected {
+        color: white;
+        background-color: rgb(83, 83, 83);
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    &__button {
+      padding: 1rem;
+      width: 10rem;
+    }
+  }
+
+
+}

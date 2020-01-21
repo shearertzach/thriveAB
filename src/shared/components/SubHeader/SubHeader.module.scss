@@ -1,0 +1,13 @@
+.o-subheader {
+  &__title {
+    font: 500 4rem/1.2 'Montserrat', sans-serif;
+    margin-bottom: 1rem;
+  }
+  &__subtitle {
+    font: 300 2rem 'Montserrat', sans-serif;
+    padding-left: .5rem;
+  }
+  &__break {
+    margin: 1.5rem 0;
+  }
+}
