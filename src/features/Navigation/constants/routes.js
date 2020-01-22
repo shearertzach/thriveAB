@@ -1,6 +1,7 @@
 import Tracking from '../../../screens/Tracking'
 import Network from '../../../screens/Network'
 import Support from '../../../screens/Support'
+import discussionPost from '../../Discussion/components/createPost/Post'
 
 
 export const routes = [
@@ -18,5 +19,10 @@ export const routes = [
     display: 'Support',
     path: '/Support',
     component: Support
+  },
+  {
+    display: 'Discussion',
+    path: '/Discussion',
+    component: discussionPost
   }
 ]
