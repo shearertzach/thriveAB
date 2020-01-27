@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import Input from '../../../../shared/components/Input'
 import Button from '../../../../shared/components/Button'
+import firebase from 'firebase'
 
 class discussionPost extends PureComponent {
     
@@ -12,7 +13,7 @@ class discussionPost extends PureComponent {
             postTitle: '',
             postText: '',
             canPost: true, //Spam filter. 5 minute timer
-            uid: this.props.userID
+            uid: this.props.userID,
         }
         this.handleTitle = this.handleTitle.bind(this);
         this.handleText = this.handleText.bind(this);
@@ -35,14 +36,18 @@ class discussionPost extends PureComponent {
         handleSubmit () {
             // postData object for submission WIP
             var postData = {
+                //Need to add calculations for int-based postID. Get latest post and add 1 at time of submission. 
+
                 user: this.state.uid,
-                postID: 420,
-                postDateTime: ''
+                postDateTime: firebase.database.ServerValue.TIMESTAMP,
+                postTitle: this.state.postTitle,
+                postText: this.state.postText
             }
             if (this.state.canPost = true && this.state.postTitle != '') {
                 //REMOVE console.log('Title: ' + this.state.postTitle);
                 //REMOVE console.log('Text: ' + this.state.postText);
                 //REMOVE console.log('User: ' + this.state.uid); 
+                console.log(postData)
             }
             else { console.log('User can not post.') }
         }
