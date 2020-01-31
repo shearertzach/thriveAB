@@ -2,22 +2,24 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import Input from '../../../../shared/components/Input'
 import Button from '../../../../shared/components/Button'
-import firebase from 'firebase'
+import { submitDiscussionPost } from '../../redux/discussionActions';
 
-class discussionPost extends PureComponent {
+class CreatePost extends PureComponent {
     
     constructor(props) { 
         super(props)
         this.state = {
-            placeholder: 'placeholder',
             postTitle: '',
             postText: '',
-            canPost: true, //Spam filter. 5 minute timer
-            uid: this.props.userID,
+            canPost: true //Spam filter. 5 minute timer. 
         }
         this.handleTitle = this.handleTitle.bind(this);
         this.handleText = this.handleText.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+      }
+
+      componentDidMount() {
+          submitDiscussionPost('test', 'test');
       }
 
         handleTitle (event) {
@@ -34,20 +36,16 @@ class discussionPost extends PureComponent {
         }
 
         handleSubmit () {
-            // postData object for submission WIP
-            var postData = {
-                //Need to add calculations for int-based postID. Get latest post and add 1 at time of submission. 
 
-                user: this.state.uid,
-                postDateTime: firebase.database.ServerValue.TIMESTAMP,
-                postTitle: this.state.postTitle,
-                postText: this.state.postText
-            }
+            const { submitDiscussionPost } = this.props;
+            
             if (this.state.canPost = true && this.state.postTitle != '') {
-                //REMOVE console.log('Title: ' + this.state.postTitle);
-                //REMOVE console.log('Text: ' + this.state.postText);
-                //REMOVE console.log('User: ' + this.state.uid); 
-                console.log(postData)
+                    // postTitle: this.state.postTitle,
+                    // postText: this.state.postText
+                    
+                    let postTitle = this.state.postText;
+                    let postText = this.state.postTitle;
+                submitDiscussionPost(postTitle, postText);
             }
             else { console.log('User can not post.') }
         }
@@ -57,7 +55,7 @@ class discussionPost extends PureComponent {
             <div>
                 <Input id='Post-Title' onChange={this.handleTitle} />
                 <Input id= 'Post-Text' onChange={this.handleText} />
-                <Button onClick={this.handleSubmit} value='Submit' />
+                <Button onClick={this.handleSubmit} /* Needs button text */ />
             </div>
         )
     }
@@ -70,4 +68,4 @@ const mapStateToProps = ({ authorization }) => {
     return { error, loggingIn }
 }
 
-export default connect(mapStateToProps)(discussionPost);
+export default connect(mapStateToProps, { submitDiscussionPost })(CreatePost);

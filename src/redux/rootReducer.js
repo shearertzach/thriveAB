@@ -5,7 +5,8 @@ import TrackerReducer from '../features/Tracking/redux/trackerReducer'
 
 const reducers = combineReducers({
   authorization: AuthorizationReducer,
-  tracker: TrackerReducer
+  tracker: TrackerReducer /* ,
+  discussion: discussionReducer */
 })
 
 export default reducers
