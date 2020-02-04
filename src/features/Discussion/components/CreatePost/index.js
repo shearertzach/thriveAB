@@ -18,10 +18,6 @@ class CreatePost extends PureComponent {
         this.handleSubmit = this.handleSubmit.bind(this);
       }
 
-      componentDidMount() {
-          submitDiscussionPost('test', 'test');
-      }
-
         handleTitle (event) {
              this.setState ({
                 postTitle: event.target.value

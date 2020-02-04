@@ -9,12 +9,14 @@ export const submitDiscussionPost = (postTitle, postText) => (dispatch, getState
         const { userID } = user;
 
         const db = firebase.firestore()
-        var postID = firebase.firestore().collection('Posts').get();
-        var timestamp = new Timestamp();
-        console.log(postID);
-        console.log(timestamp);
+        //var timestamp = new Timestamp();
+
+        //console.log(timestamp);
+
         // if (userID = null) {
-                
+
+        const timestamp = firebase.firestore.Timestamp.now();
+
                 db.collection('Posts').doc().set({
                         // userID: 0, 
                         // postDateTime: 1/1/1900, 
@@ -36,13 +38,16 @@ export const submitDiscussionPost = (postTitle, postText) => (dispatch, getState
 
 export const getDiscussionList = () => (dispatch, getstate) => {{
 
-        const { user } = getState().authorization;
-        const { userID } = user;
+        // const { user } = getState().authorization;
+        // const { userID } = user;
 
         const db = firebase.firestore()
 
-        if (userID != null) {
-                //query needs to go here. else return authForm or error to prompt authForm.
-        }
+        db.collection('Posts').get().then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                        console.log(doc.data());
+                })
+        })
+
 }}
     
