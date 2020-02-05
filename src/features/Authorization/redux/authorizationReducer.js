@@ -2,7 +2,6 @@ import * as types from './authorizationTypes'
 
 const INITIAL_STATE = {
   loggedIn: false,
-  userID: 0,
   user: {},
   meta: {
     loggingIn: false,
@@ -19,7 +18,7 @@ export default (state = INITIAL_STATE, action ) => {
         meta: {
           ...state.meta,
           loggingIn: true,
-          error: false
+          error: ''
         }
       }
     }
@@ -31,7 +30,7 @@ export default (state = INITIAL_STATE, action ) => {
         meta: {
           ...state.meta,
           loggingIn: false,
-          error: false
+          error: ''
         }
       }
     }

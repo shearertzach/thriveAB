@@ -39,7 +39,6 @@ class Tracking extends PureComponent {
 Tracking.propTypes = {
   loggedIn: PropTypes.bool,
   user: PropTypes.object
-
 }
 
 const mapStateToProps = ({ authorization }) => {

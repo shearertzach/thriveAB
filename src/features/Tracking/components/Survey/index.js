@@ -4,6 +4,7 @@ import style from './Survey.module.scss'
 import surveyQuestions from '../../constants/surveyQuestions.json'
 import classnames from 'classnames'
 import { submitTrackerSurveyData } from '../../redux/trackerActions'
+import { PropTypes } from 'prop-types'
 
 class Survey extends Component {
   constructor(props) {
@@ -60,46 +61,62 @@ class Survey extends Component {
   render() {
     let date = new Date()
     let today = date.getDate()
-    // TODO: - Make this time based using moment. One survey per day.
+    const { completedSurvey } = this.props
+
     const { currentIndex, selectedAnswerIndex, hasSubmitted } = this.state
-    if (hasSubmitted) return <h2 className={style['c-survey__title']}>Thank you for taking the Survey</h2>
-    return (
-      <div className={style['c-survey']}>
-        <h2 className={style['c-survey__title']}>Survey</h2>
-        <h3 className={style['c-survey__subtitle']}>{`${currentIndex + 1}. ${surveyQuestions[currentIndex].question}`}</h3>
-        <div className={style['c-survey__answers']}>
-          {
-            surveyQuestions[currentIndex].answers.map((answer, index) => (
-              <div
-                onClick={() => this.handleAnswerPress(answer.points, index, today)}
-                key={answer.text}
-                className={classnames(style['c-survey__answers__answer'],
-                  selectedAnswerIndex === index ? style['c-survey__answers__answer--selected'] : '')}
-              >
-                <p>{answer.text}</p>
-              </div>
-            ))
-          }
+
+    if (hasSubmitted) {
+      return <h2 className={style['c-survey__title']}>Thank you for taking the Survey</h2>
+    } else if (!completedSurvey) {
+      return (
+        <div className={style['c-survey']}>
+          <h2 className={style['c-survey__title']}>Survey</h2>
+          <h3 className={style['c-survey__subtitle']}>{`${currentIndex + 1}. ${surveyQuestions[currentIndex].question}`}</h3>
+          <div className={style['c-survey__answers']}>
+            {
+              surveyQuestions[currentIndex].answers.map((answer, index) => (
+                <div
+                  onClick={() => this.handleAnswerPress(answer.points, index, today)}
+                  key={answer.text}
+                  className={classnames(style['c-survey__answers__answer'],
+                    selectedAnswerIndex === index ? style['c-survey__answers__answer--selected'] : '')}
+                >
+                  <p>{answer.text}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div className={style['c-survey__buttons']}>
+            <button
+              onClick={() => this.setState({ currentIndex: currentIndex - 1 })}
+              disabled={currentIndex === 0}
+              className={style['c-survey__buttons__button']}
+            >
+              Previous
+            </button>
+            <button
+              disabled={selectedAnswerIndex === -1}
+              className={style['c-survey__buttons__button']}
+              onClick={this.handleNextPress}
+            >
+              {currentIndex + 1 === surveyQuestions.length ? 'Submit' : 'Next'}
+            </button>
+          </div>
         </div>
-        <div className={style['c-survey__buttons']}>
-          <button
-            onClick={() => this.setState({ currentIndex: currentIndex - 1 })}
-            disabled={currentIndex === 0}
-            className={style['c-survey__buttons__button']}
-          >
-          Previous
-          </button>
-          <button
-            disabled={selectedAnswerIndex === -1}
-            className={style['c-survey__buttons__button']}
-            onClick={this.handleNextPress}
-          >
-            {currentIndex + 1 === surveyQuestions.length ? 'Submit' : 'Next'}
-          </button>
-        </div>
-      </div>
-    )
+      )
+    } else return null
   }
 }
 
-export default connect(null, { submitTrackerSurveyData })(Survey)
+Survey.propTypes = {
+  completedSurvey: PropTypes.bool,
+  submitTrackerSurveyData: PropTypes.func
+}
+
+const mapStateToProps = ({ tracker }) => {
+  const { completedSurvey } = tracker
+
+  return { completedSurvey }
+}
+
+export default connect(mapStateToProps, { submitTrackerSurveyData })(Survey)
