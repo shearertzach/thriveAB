@@ -1,10 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import Input from "../../../../shared/components/Input";
-import Button from "../../../../shared/components/Button";
 import { submitDiscussionPost } from "../../redux/discussionActions";
 import "./createPostModal.css";
-import { throwStatement } from "@babel/types";
 
 
 class CreatePost extends PureComponent {

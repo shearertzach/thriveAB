@@ -46,10 +46,7 @@ export const getALLDiscussionList = () => (dispatch, getstate) => {{
                         var postObj = doc.data();
                         postsArray.push(postObj);
                         
-                })
-
-                console.log(postsArray)
-                
+                })                
 
         })
 

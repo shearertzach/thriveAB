@@ -9,27 +9,35 @@ class PostList extends PureComponent{
 
     constructor(props){
         super(props);
+        this.state = { posts: []}
     }
 
-    componentDidMount() {
+    async wcomponentDidMount() {
 
         const { getALLDiscussionList } = this.props;
-        const data = getALLDiscussionList();
-        data.map(function(postTitle, i) {
-            console.log(postTitle)
-            return (<li>
-                        <span>
-                            test {i}
-                        </span>
-                    </li>
-                    )
-        }
-        );
 
+        try {
+            const data = await getALLDiscussionList();
+            console.log("dataFetched");
+            this.setState({posts: data});
+            console.log(this.state.posts)
+        }
+        catch(error) {
+            console.log(error);
+    
+        }
     }
 
+    mapPosts() {
+        
+
+
+    }
+    
     render(){
         
+        const allPosts = this.state.posts;
+
         return(
             <div>
                 <div className='discussionBanner'>
@@ -37,7 +45,14 @@ class PostList extends PureComponent{
                     <Button className='searchBtn' />
                 </div>
                 <ul className="postList">
-                    {}
+                    { 
+                        // data.map((post) => (
+                        //     <li>test</li>
+                        // )) 
+                        allPosts.map((post) => (
+                            console.log('test')
+                        ))
+                    }
                 </ul>
             </div>
             )
