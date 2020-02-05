@@ -1,9 +1,8 @@
-import firebase from 'firebase'
-import { Timestamp } from '@google-cloud/firestore';
+import firebase from 'firebase';
+import React from 'react';
 
 export const submitDiscussionPost = (postTitle, postText) => (dispatch, getState) => {{
 
-        console.log("test")
 
         const { user } = getState().authorization;
         const { userID } = user;
@@ -18,17 +17,13 @@ export const submitDiscussionPost = (postTitle, postText) => (dispatch, getState
         const timestamp = firebase.firestore.Timestamp.now();
 
                 db.collection('Posts').doc().set({
-                        // userID: 0, 
-                        // postDateTime: 1/1/1900, 
-                        // postTitle: postTitle, 
-                        // postText: postText
                         postDateTime: timestamp,
                         postText: postText,
                         postTitle: postTitle,
-                        user: 0
+                        user: 0, //Placeholder
+                        postID: 0 //Placeholder
                 });
 
-                console.log('the function was called');
         // } 
 
         // else { 
@@ -36,7 +31,7 @@ export const submitDiscussionPost = (postTitle, postText) => (dispatch, getState
         // }
 }}
 
-export const getDiscussionList = () => (dispatch, getstate) => {{
+export const getALLDiscussionList = () => (dispatch, getstate) => {{
 
         // const { user } = getState().authorization;
         // const { userID } = user;
@@ -44,10 +39,34 @@ export const getDiscussionList = () => (dispatch, getstate) => {{
         const db = firebase.firestore()
 
         db.collection('Posts').get().then((snapshot) => {
+                
+                var postsArray = [];
                 snapshot.docs.forEach(doc => {
-                        console.log(doc.data());
+                        var postObj = doc.data();
+                        postsArray.push(postObj);
                 })
+
         })
+       
 
 }}
+
+// export const getSEARCHDiscussionList = () => (dispatch, getstate) => {{
+
+//         const { user } = getState().authorization;
+//         const { userID } = user;
+
+//         const db = firebase.firestore()
+
+//         db.collection('Posts').get().then((snapshot) => {
+//                 var postsArray = [];
+//                 snapshot.docs.forEach(doc => {
+//                         var postObj = doc.data();
+//                         postsArray.push(postObj);
+//                 })
+                
+//         })
+       
+
+// }}
     

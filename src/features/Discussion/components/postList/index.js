@@ -1,21 +1,33 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { getDiscussionList } from '../../redux/discussionActions'
+import { getALLDiscussionList } from '../../redux/discussionActions'
+import Input from '../../../../shared/components/Input';
+import Button from '../../../../shared/components/Button';
+import style from './PostList.module.scss'
 
 class PostList extends PureComponent{
 
+    constructor(props){
+        super(props);
+    }
+
+    componentDidMount() {
+        const { getALLDiscussionList } = this.props;
+        getALLDiscussionList();
+    }
+
     render(){
-        
-        const { getDiscussionList } = this.props;
-        getDiscussionList();
 
         return(
             <div>
+                <div className={style['discussionBanner']}>
+                    <Input className={style['searchInput']} />
+                    <Button className={style['searchBtn']} />
+                </div>
                 <ul className="postList">
-
                 </ul>
             </div>
-    )
+            )
 }
 }
 
@@ -25,4 +37,4 @@ const mapStateToProps = ({ authorization }) => {
     return { error, loggingIn }
 }
 
-export default connect(mapStateToProps, { getDiscussionList })(PostList);
+export default connect(mapStateToProps, { getALLDiscussionList })(PostList);
