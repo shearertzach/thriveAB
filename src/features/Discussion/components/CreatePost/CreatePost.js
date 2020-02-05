@@ -1,95 +1,95 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux'
-import Input from '../../../../shared/components/Input'
-import Button from '../../../../shared/components/Button'
-import { submitDiscussionPost } from '../../redux/discussionActions';
-import './createPostModal.css';
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import Input from "../../../../shared/components/Input";
+import Button from "../../../../shared/components/Button";
+import { submitDiscussionPost } from "../../redux/discussionActions";
+import "./createPostModal.css";
+import { throwStatement } from "@babel/types";
 
-var modal = document.querySelector(".modal");
-var trigger = document.querySelector(".trigger");
-var closeButton = document.querySelector(".close-button");
-
-function toggleModal() {
-    modal.classList.toggle("show-modal");
-}
-
-function windowOnClick(event) {
-    if (event.target === modal) {
-        toggleModal();
-    }
-}
-
-trigger.addEventListener("click", toggleModal);
-closeButton.addEventListener("click", toggleModal);
-window.addEventListener("click", windowOnClick);
 
 class CreatePost extends PureComponent {
-    
-    constructor(props) { 
-        super(props)
-        this.state = {
-            postTitle: '',
-            postText: '',
-            canPost: true //Spam filter. 5 minute timer. 
-        }
-        this.handleTitle = this.handleTitle.bind(this);
-        this.handleText = this.handleText.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      postTitle: "",
+      postText: "",
+      canPost: true, //Spam filter. 5 minute timer.
+      isHidden: true
+    };
+    this.handleTitle = this.handleTitle.bind(this);
+    this.handleText = this.handleText.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-        handleTitle (event) {
-             this.setState ({
-                postTitle: event.target.value
-            }) 
-           
-        }
-        handleText (event) {
-             this.setState ({
-                postText: event.target.value
-            }) 
-            
-        }
+  handleTitle(event) {
+    this.setState({
+      postTitle: event.target.value
+    });
+  }
+  handleText(event) {
+    this.setState({
+      postText: event.target.value
+    });
+  }
 
-        handleSubmit () {
+  handleSubmit() {
+    const { submitDiscussionPost } = this.props;
 
-            const { submitDiscussionPost } = this.props;
-            
-            if (this.state.canPost = true && this.state.postTitle != '') {
-                    // postTitle: this.state.postTitle,
-                    // postText: this.state.postText
-                    
-                    let postTitle = this.state.postText;
-                    let postText = this.state.postTitle;
-                submitDiscussionPost(postTitle, postText);
-            }
-            else { console.log('User can not post.') }
-        }
-    
-    
-        
-    render() {
-        return (
-            <div>
-            <button class="trigger">Click here to trigger the modal!</button>
-    <div class="modal">
-                <div class="modal-content">
-                <Input id='Post-Title' onChange={this.handleTitle} />
-                <Input id= 'Post-Text' onChange={this.handleText} />
-           <Button onClick={this.handleSubmit} class="close-button" /* Needs button text */ > Submit Post! </Button>
-          
-        </div>
-                </div>
-                </div>
-            
-        )
+    if ((this.state.canPost = true && this.state.postTitle != "")) {
+      // postTitle: this.state.postTitle,
+      // postText: this.state.postText
+
+      let postTitle = this.state.postText;
+      let postText = this.state.postTitle;
+      submitDiscussionPost(postTitle, postText);
+    } else {
+      console.log("User can not post.");
     }
+  }
 
+  render() {
+    const { isHidden } = this.state;
+    return (
+        <div class="createPost">
+            <br />
+        <button
+          class="trigger"
+          onClick={() => this.setState({ isHidden: !isHidden })}
+        >
+          {"Click here to Create a Post"}
+            </button>
+            <br />
+        <div style={{ display: isHidden ? "block" : "none" }} >
+                <div >
+                    {"Enter Post Title Here"}
+                    <br />
+            <Input id="Post-Title" onChange={this.handleTitle} />
+                    <br />
+                    {"Enter Post Text Here"}
+                    <br />
+            <Input id="Post-Text" onChange={this.handleText} />
+                </div>
+                <br />
+                
+          <button
+            onClick={this.handleSubmit}
+            class="close-button" /* Needs button text */
+          >
+            {" Submit Post!"}
+          </button>
+        </div>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = ({ authorization }) => {
-    const { meta } = authorization
-    const { error, loggingIn } = meta
-    return { error, loggingIn }
-}
+  const { meta } = authorization;
+  const { error, loggingIn } = meta;
+  return { error, loggingIn };
+};
 
-export default connect(mapStateToProps, { submitDiscussionPost })(CreatePost);
+export default connect(
+  mapStateToProps,
+  { submitDiscussionPost }
+)(CreatePost);
