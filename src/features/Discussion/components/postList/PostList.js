@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getALLDiscussionList } from '../../redux/discussionActions'
 import Input from '../../../../shared/components/Input';
 import Button from '../../../../shared/components/Button';
-import style from './PostList.module.scss'
+import './PostList.css'
 
 class PostList extends PureComponent{
 
@@ -12,24 +12,32 @@ class PostList extends PureComponent{
     }
 
     componentDidMount() {
+
         const { getALLDiscussionList } = this.props;
-        getALLDiscussionList();
+        const data = getALLDiscussionList();
+        data.map(function(postTitle, i) {
+            console.log(postTitle)
+            return (<li>
+                        <span>
+                            test {i}
+                        </span>
+                    </li>
+                    )
+        }
+        );
+
     }
 
     render(){
-
+        
         return(
             <div>
-                <div className={style['discussionBanner']}>
-                    <Input className={style['searchInput']} />
-                    <Button className={style['searchBtn']} />
+                <div className='discussionBanner'>
+                    <Input className='searchInput' />
+                    <Button className='searchBtn' />
                 </div>
                 <ul className="postList">
-                    <li>
-                        <span>
-                            test
-                        </span>
-                    </li>
+                    {}
                 </ul>
             </div>
             )

@@ -14,7 +14,7 @@ class CreatePost extends PureComponent {
       postTitle: "",
       postText: "",
       canPost: true, //Spam filter. 5 minute timer.
-      isHidden: true
+      isHidden: false
     };
     this.handleTitle = this.handleTitle.bind(this);
     this.handleText = this.handleText.bind(this);
@@ -61,7 +61,7 @@ class CreatePost extends PureComponent {
             <br />
         <div style={{ display: isHidden ? "block" : "none" }} >
                 <div >
-                    {"Enter Post Title Here"}
+                    {"Title"}
                     <br />
             <input id="Post-Title" onChange={this.handleTitle} class="title" />
                     <br />
@@ -76,7 +76,7 @@ class CreatePost extends PureComponent {
             onClick={this.handleSubmit}
             class="close-button" /* Needs button text */
           >
-            {" Submit Post!"}
+            {" Submit Post"}
           </button>
         </div>
       </div>

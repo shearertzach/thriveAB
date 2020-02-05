@@ -23,7 +23,7 @@ export const submitDiscussionPost = (postTitle, postText) => (dispatch, getState
                         user: 0, //Placeholder
                         postID: 0 //Placeholder
                 });
-
+                
         // } 
 
         // else { 
@@ -37,27 +37,23 @@ export const getALLDiscussionList = () => (dispatch, getstate) => {{
         // const { userID } = user;
 
         const db = firebase.firestore()
+        var postsArray = [];
 
         db.collection('Posts').get().then((snapshot) => {
 
-                var postsArray = [];
                 snapshot.docs.forEach(doc => {
+                        
                         var postObj = doc.data();
                         postsArray.push(postObj);
-                        // return(
-                        //         <li key={postObj.postID}>
-                        //                 <span>
-                        //                 {postObj.postTitle}
-                        //                 </span>
-                        //                 <span>
-                        //                         {postObj.postText}
-                        //                 </span>
-                        //         </li>
-                        // )
+                        
                 })
 
+                console.log(postsArray)
+                
+
         })
-       
+
+        return postsArray; 
 
 }}
 
