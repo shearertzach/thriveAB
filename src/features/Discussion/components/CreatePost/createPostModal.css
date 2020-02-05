@@ -1,0 +1,28 @@
+.createPost {
+    text-align: center;
+    font-size: 2vh;
+    background-color: rgb(244,238,226);
+}
+
+.trigger {
+   border-style: double;
+   font-size: 1.5vh;
+   height: 5vh;
+   width: 20vh;
+}
+
+body {
+    background-color: rgb(244,238,226);
+}
+
+.title {
+    height: 4vh;
+    width: 45vh;
+    
+}
+
+.text {
+    height: 25vh ;
+    width: 50vh;
+
+}
