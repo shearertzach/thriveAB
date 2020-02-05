@@ -63,12 +63,13 @@ class CreatePost extends PureComponent {
                 <div >
                     {"Enter Post Title Here"}
                     <br />
-            <Input id="Post-Title" onChange={this.handleTitle} />
+            <input id="Post-Title" onChange={this.handleTitle} class="title" />
                     <br />
                     {"Enter Post Text Here"}
                     <br />
-            <Input id="Post-Text" onChange={this.handleText} />
-                </div>
+                    
+                    <input id="Post-Text" onChange={this.handleText} class="text" />
+                    </div>
                 <br />
                 
           <button
