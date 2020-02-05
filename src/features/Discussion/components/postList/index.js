@@ -25,6 +25,11 @@ class PostList extends PureComponent{
                     <Button className={style['searchBtn']} />
                 </div>
                 <ul className="postList">
+                    <li>
+                        <span>
+                            test
+                        </span>
+                    </li>
                 </ul>
             </div>
             )

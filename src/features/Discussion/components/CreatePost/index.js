@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Input from '../../../../shared/components/Input'
 import Button from '../../../../shared/components/Button'
 import { submitDiscussionPost } from '../../redux/discussionActions';
-import "../CreatePost/createPostModal";
+import './createPostModal.css';
 
 var modal = document.querySelector(".modal");
 var trigger = document.querySelector(".trigger");

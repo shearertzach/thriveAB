@@ -39,11 +39,21 @@ export const getALLDiscussionList = () => (dispatch, getstate) => {{
         const db = firebase.firestore()
 
         db.collection('Posts').get().then((snapshot) => {
-                
+
                 var postsArray = [];
                 snapshot.docs.forEach(doc => {
                         var postObj = doc.data();
                         postsArray.push(postObj);
+                        // return(
+                        //         <li key={postObj.postID}>
+                        //                 <span>
+                        //                 {postObj.postTitle}
+                        //                 </span>
+                        //                 <span>
+                        //                         {postObj.postText}
+                        //                 </span>
+                        //         </li>
+                        // )
                 })
 
         })
