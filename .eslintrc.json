@@ -17,7 +17,6 @@
       "react/jsx-uses-vars": 1,
       "indent": ["warn", 2, {"SwitchCase": 1}],
       "react/no-unescaped-entities": 0,
-      "max-len": ["warn", { "code": 160 }],
       "space-infix-ops":"warn",
       "keyword-spacing": "warn",
       "object-curly-spacing": ["warn", "always"],

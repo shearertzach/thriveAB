@@ -21,7 +21,7 @@ export const cardInfo = [
   },
   {
     img: `${require('../../../shared/assets/pattiHard.png')}`,
-    title: 'Patti E. Hard, Certified Counseling and Therapy',
+    title: 'Patti E. Hard, Counseling & Therapy',
     subtitle: 'Lexington, Ky',
     info1: '517 Nicholasville Rd, Lexington, KY 40503',
     info2: 'Monday-Thursday	10AM– 5PM EST',
@@ -110,7 +110,7 @@ export const cardInfo = [
     webLink: 'https://www.hopeclinicforwomen.org/'
   },
   {
-    img: `${require('../../../shared/assets/brighterFutureCounseling.jpg')}`,
+    img: `${require('../../../shared/assets/brighterFutureCounseling.png')}`,
     title: 'Brighter Futures Counseling, PLLC',
     subtitle: 'Elizabethtown, KY',
     info1: '1002 N Mulberry St, Elizabethtown, KY 42701',
@@ -120,7 +120,7 @@ export const cardInfo = [
     webLink: 'https://brighterfuturescounseling.org/'
   },
   {
-    img: `${require('../../../shared/assets/encouragingHeartsCounseling.jpg')}`,
+    img: `${require('../../../shared/assets/encouragingHeartsCounseling.png')}`,
     title: 'Encouraging Hearts Counseling, PLLC',
     subtitle: 'Elizabethtown, KY',
     info1: '921 N Main, Elizabethtown, KY 42701',

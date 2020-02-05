@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import style from './Support.module.scss'
 import { SubHeader, InfoSection } from '../../shared/components'
 import SupportVideo from '../../features/Support/components/SupportVideo'
-import ContactForm from '../../features/Support/components/ContactForm'
 
 class Support extends PureComponent {
   render() {
@@ -17,16 +16,17 @@ class Support extends PureComponent {
           <div className={style['c-duo-video-container']}>
             <div className={style['c-duo-video-container__box']}>
               <iframe className={style['c-duo-video-container__box__video']}
-                src='https://www.youtube.com/embed/V64PqXKs02g'>
+                src='https://www.youtube.com/embed/V64PqXKs02g'
+                title='video1'>
               </iframe>
             </div>
             <div className={style['c-duo-video-container__box']}>
               <iframe className={style['c-duo-video-container__box__video']}
-                src='https://www.youtube.com/embed/e6iQp-JdjkU'>
+                src='https://www.youtube.com/embed/e6iQp-JdjkU'
+                title='video1'>
               </iframe>
             </div>
           </div>
-          <ContactForm />
         </InfoSection>
       </div>
     )
