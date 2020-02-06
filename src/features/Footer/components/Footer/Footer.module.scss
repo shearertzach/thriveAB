@@ -1,0 +1,25 @@
+.c-footer {
+  background-color: rgb(44, 44, 44);
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__linkContainer {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    justify-content: space-between;
+    padding: 0 10px;
+
+    &__link {
+      color: rgb(141, 141, 141);
+      font-size: 17px;
+      text-decoration: none;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}

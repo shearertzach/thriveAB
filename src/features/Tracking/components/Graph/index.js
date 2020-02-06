@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import style from './Graph.module.scss'
+// import style from './Graph.module.scss'
 import { getSurveyData } from '../../redux/trackerActions'
 import { ResponsiveLine } from '@nivo/line'
+import { PropTypes } from 'prop-types'
+import { css } from "@emotion/core"
+import RingLoader from "react-spinners/RingLoader"
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  text-align: center;
+`
 
 class Graph extends Component {
   constructor(props) {
@@ -12,80 +22,59 @@ class Graph extends Component {
     }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.setData()
+  }
+
+  async setData() {
     const { getSurveyData } = this.props
 
     try {
       const dataToStore = await getSurveyData()
       this.setState({ data: dataToStore })
-      console.log(this.state.data)
     } catch (error) {
       console.log(error)
     }
-
   }
 
   render() {
-    const graphData = this.state.data
-    console.log(this.state.data)
+
+    function printGraph() {
+      let restorepage = document.body.innerHTML
+      let printArea = document.getElementById('graph').innerHTML
+      document.body.innerHTML = printArea
+      window.print()
+      document.body.innerHTML = restorepage
+    }
+
+    let graphData = this.state.data
 
     if (graphData === null) {
       return (
-        <div style={{ height: '25rem', width: '15rem' }}>
+        <div style={{ height: '25rem', width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h2 style={{ marginBottom: '40px' }}>Please wait while your data loads....</h2>
+          <RingLoader
+            css={override}
+            size={75}
+            color={"#6699CC"}
+            loading={this.props.loadingData}
+          />
         </div>
       )
-    } else
+    } else {
       return (
-        <div style={{ height: '500px', width: '750px' }}>
-          {/* <ResponsiveLine
-            data={graphData}
-            margin={{ top: 60, right: 140, bottom: 70, left: 90 }}
-            xScale={{ type: 'linear', min: 1, max: 31 }}
-            xFormat={function (e) { return e + " pts" }}
-            yScale={{ type: 'linear', min: 0, max: 21 }}
-            yFormat={function (e) { return e + "" }}
-            blendMode='multiply'
-            width={750}
-            height={500}
-            nodeSize={16}
-            colors={{ scheme: 'dark2' }}
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              orient: 'bottom',
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: 'Day of Month',
-              legendPosition: 'middle',
-              legendOffset: 46
-            }}
-            axisLeft={{
-              orient: 'left',
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: 'Points',
-              legendPosition: 'middle',
-              legendOffset: -60
-            }}
-            
-          /> */}
-
-
-
-
+        <div id='graph' style={{ height: '450px', width: '700px' }}>
           <ResponsiveLine
-            data={graphData}
+            data={this.state.data}
             margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-            xScale={{ type: 'point', min: '1', max: '31', stacked: true, reverse: false }}
-            xFormat={function(e){return "Day of Month: " + e}}
+            xyScale={{ type: 'point', min: '1', max: '31', stacked: true, reverse: false }}
+            xFormat={function (e) { return "Day of Month: " + e }}
             yScale={{ type: 'linear' }}
-            yFormat={function(e){return "Score: " + e}}
+            yFormat={function (e) { return "Score: " + e }}
             axisTop={null}
             axisRight={null}
             width={750}
-            height={500}
+            height={450}
             axisBottom={{
               orient: 'bottom',
               tickSize: 5,
@@ -104,51 +93,32 @@ class Graph extends Component {
               legendOffset: -40,
               legendPosition: 'middle'
             }}
-            colors={{ scheme: 'nivo' }}
-            pointSize={10}
-            pointColor={{ theme: 'background' }}
+            lineWidth={3}
+            colors='#6699CC'
+            borderColor='#6699CC'
+            pointSize={15}
+            pointColor='#f4eee1'
             pointBorderWidth={2}
             pointBorderColor={{ from: 'serieColor' }}
-            pointLabel="y"
+            pointLabel='y'
             pointLabelYOffset={-12}
             useMesh={true}
-            legends={[
-              {
-                anchor: 'bottom-right',
-                direction: 'column',
-                justify: false,
-                translateX: 100,
-                translateY: 0,
-                itemsSpacing: 0,
-                itemDirection: 'left-to-right',
-                itemWidth: 80,
-                itemHeight: 20,
-                itemOpacity: 0.75,
-                symbolSize: 12,
-                symbolShape: 'circle',
-                symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                effects: [
-                  {
-                    on: 'hover',
-                    style: {
-                      itemBackground: 'rgba(0, 0, 0, .03)',
-                      itemOpacity: 1
-                    }
-                  }
-                ]
-              }
-            ]}
           />
-
-
+          <button onClick={printGraph}>Print Page</button>
         </div>
       )
+    }
   }
 }
 
+Graph.propTypes = {
+  getSurveyData: PropTypes.func,
+  loadingData: PropTypes.bool
+}
+
 const mapStateToProps = ({ tracker }) => {
-  const { graphData } = tracker
-  return { graphData }
+  const { loadingData } = tracker
+  return { loadingData }
 }
 
 export default connect(mapStateToProps, { getSurveyData })(Graph)

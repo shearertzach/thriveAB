@@ -1,77 +1,102 @@
 import * as types from './trackerTypes'
 import firebase from 'firebase'
-import { organizeData } from '../helpers/dataHelper'
 
 const date = new Date()
 const months = ['January', 'February', 'March', 'April', 'May', "June", 'July', 'August', 'September', 'October', 'November', 'December']
-let currentDay = `${months[date.getMonth()]}, ${date.getDate()}`
+let currentDay = `${months[date.getMonth()]}, ${date.getDate() + 3}`
 
 
 export const submitTrackerSurveyData = (surveyData) => (dispatch, getState) => {
   const { user } = getState().authorization
   const { userId } = user
   const db = firebase.firestore()
-  db.collection('users').doc(userId).collection('Surveys').doc(`${date.getFullYear()}`).collection(`${date.getMonth() + 1}`).doc(`${currentDay}`).set({ survey: surveyData })
+
+  surveyData.push(date.getDate() + 3)
+
+  const surveryCollection = db.collection('users').doc(userId).collection('Surveys')
+  surveryCollection.doc(`${date.getFullYear()}`).collection(`${date.getMonth() + 1}`).doc(`${currentDay}`).set({ survey: surveyData })
+  db.collection('users').doc(userId).set({ submittedSurvey: true })
+  dispatch(submitTrackerSurveyDataSuccess(true))
 }
 
-const submitTrackerSurveyDataBegin = () => ({
-  type: types.SUBMIT_TRACKER_SURVEY_DATA_BEGIN
-})
+// const submitTrackerSurveyDataBegin = () => ({
+//   type: types.SUBMIT_TRACKER_SURVEY_DATA_BEGIN
+// })
 
-const submitTrackerSurveyDataFail = () => ({
-  type: types.SUBMIT_TRACKER_SURVEY_DATA_FAIL
-})
+// const submitTrackerSurveyDataFail = () => ({
+//   type: types.SUBMIT_TRACKER_SURVEY_DATA_FAIL
+// })
 
-const submitTrackerSurveyDataSuccess = () => ({
-  type: types.SUBMIT_TRACKER_SURVEY_DATA_SUCCESS
+const submitTrackerSurveyDataSuccess = (data) => ({
+  type: types.SUBMIT_TRACKER_SURVEY_DATA_SUCCESS,
+  payload: data
 })
 
 export const getSurveyData = () => async (dispatch, getState) => {
   const { user } = getState().authorization
   const { userId } = user
   const db = firebase.firestore()
-  const date = new Date()
+  const surveryCollection = db.collection('users').doc(userId).collection('Surveys')
+  let todaysData = undefined
   let dataToExport = [
     {
-      "id":"Data",
-      "data":[
-
+      "id": "Data",
+      "data": [
       ]
     }
   ]
 
-  for (let day = 0; day < 31; day++) {
-    try {
-      console.log(`Tacking Day: ${months[date.getMonth()]}, ${day}`)
-      await db.collection('users').doc(userId).collection('Surveys').doc(`${date.getFullYear()}`).collection(`${date.getMonth() + 1}`).doc(`${months[date.getMonth()]}, ${day}`).get()
-        .then((fbData) => {
-          const data = fbData.data()
-          if (data === undefined) {
-            console.log("Data not found.")
-          } else {
-            dataToExport[0].data.push({ 'x': day, 'y': data.survey[7] })
-            console.log(data)
-            console.log(dataToExport)
-          }
-        })
-    } catch {
-      console.log("Data not found.")
-    }
+  await db.collection('users').doc(userId).collection('Surveys').doc(`${date.getFullYear()}`).collection(`${date.getMonth() + 1}`).get()
+    .then((snapshot) => {
+      snapshot.docs.forEach(doc => {
+        console.log(doc.data())
+
+        let data = doc.data()
+        let day = data.survey[8]
+        let score = data.survey[7]
+
+        let objectToPush = { "x": day, "y": score }
+
+        dataToExport[0].data.push(objectToPush)
+
+      })
+    })
+
+  dispatch(startTrackerLoader())
+
+  await surveryCollection.doc(`${date.getFullYear()}`).collection(`${date.getMonth() + 1}`).doc(`${currentDay}`).get()
+    .then((fbData) => {
+      const data = fbData.data()
+      todaysData = data
+    })
+
+  if (todaysData === undefined) {
+    db.collection('users').doc(userId).set({ submittedSurvey: false })
+    dispatch(getSurveyDataSuccess(false))
+  } else {
+    db.collection('users').doc(userId).set({ submittedSurvey: true })
+    dispatch(getSurveyDataSuccess(true))
   }
 
-  return organizeData(dataToExport)
+  dispatch(endTrackerLoader())
+
+  console.log(dataToExport)
+
+  return dataToExport
 
 }
 
-const getSurveyDataBegin = () => ({
-  type: types.GET_TRACKER_SURVEY_DATA_BEGIN
+
+
+const startTrackerLoader = () => ({
+  type: types.TRACKER_LOADER_START
 })
 
-const getSurveyDataFail = () => ({
-  type: types.GET_TRACKER_SURVEY_DATA_FAIL
+const endTrackerLoader = () => ({
+  type: types.TRACKER_LOADER_END
 })
 
 const getSurveyDataSuccess = (data) => ({
   type: types.GET_TRACKER_SURVEY_DATA_SUCCESS,
-  data
+  payload: data
 })
