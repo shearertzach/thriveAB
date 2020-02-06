@@ -1,6 +1,5 @@
 import firebase from 'firebase';
-import React from 'react';
-
+import * as types from './discussionTypes' 
 export const submitDiscussionPost = (postTitle, postText) => (dispatch, getState) => {{
 
 
@@ -31,7 +30,7 @@ export const submitDiscussionPost = (postTitle, postText) => (dispatch, getState
         // }
 }}
 
-export const getALLDiscussionList = () => (dispatch, getstate) => {{
+export const getALLDiscussionList = () => async (dispatch, getstate) => {{
 
         // const { user } = getState().authorization;
         // const { userID } = user;
@@ -39,9 +38,12 @@ export const getALLDiscussionList = () => (dispatch, getstate) => {{
         const db = firebase.firestore()
         var postsArray = [];
 
-        db.collection('Posts').get().then((snapshot) => {
+        db.collection('Posts').get().then(
+                (snapshot) => {
 
-                snapshot.docs.forEach(doc => {
+                        
+
+                        snapshot.docs.forEach(doc => {
                         
                         var postObj = doc.data();
                         postsArray.push(postObj);
@@ -53,6 +55,43 @@ export const getALLDiscussionList = () => (dispatch, getstate) => {{
         return postsArray; 
 
 }}
+
+const asyncDispatchMiddleware  = store => next => action => {
+        let syncActivityFinished = false;
+        let actionQueue = [];
+
+        function flushQueue() {
+                actionQueue.forEach(a => store.dispatch(a)      ); // flush queue
+                actionQueue = [];
+                }
+            
+        function asyncDispatch(asyncAction) {
+                actionQueue = actionQueue.concat(       [asyncAction]);
+            
+                if (syncActivityFinished) {
+                        flushQueue();
+                }
+                }
+            
+                const actionWithAsyncDispatch =
+                        Object.assign({}, action, {     asyncDispatch });
+            
+                next(actionWithAsyncDispatch);
+                syncActivityFinished = true;
+                flushQueue();
+};         
+
+const getALLDiscussionListDataBegin = () => ({
+        type: types.GET_DISCUSSION_DATA_BEGIN
+      })
+      
+const getALLDiscussionListDataFail = () => ({
+        type: types.GET_DISCUSSION_DATA_FAIL
+      })
+      
+const getALLDiscussionListDataSuccess = () => ({
+        type: types.GET_DISCUSSION_DATA_SUCCESS
+      })
 
 // export const getSEARCHDiscussionList = () => (dispatch, getstate) => {{
 

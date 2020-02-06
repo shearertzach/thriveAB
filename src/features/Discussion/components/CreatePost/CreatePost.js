@@ -47,36 +47,37 @@ class CreatePost extends PureComponent {
   render() {
     const { isHidden } = this.state;
     return (
-        <div class="createPost">
+        <div className="createPost">
             <br />
         <button
-          class="trigger"
+          className="trigger"
           onClick={() => this.setState({ isHidden: !isHidden })}
         >
-          {"Click here to Create a Post"}
+          {"Create your post"}
             </button>
             <br />
         <div style={{ display: isHidden ? "block" : "none" }} >
-                <div >
+                <div>
                     {"Title"}
                     <br />
-            <input id="Post-Title" onChange={this.handleTitle} class="title" />
+            <input id="Post-Title" onChange={this.handleTitle} className="title" />
                     <br />
                     {"Enter Post Text Here"}
                     <br />
                     
-                    <input id="Post-Text" onChange={this.handleText} class="text" />
+                    <input id="Post-Text" onChange={this.handleText} className="text" />
                     </div>
                 <br />
                 
           <button
             onClick={this.handleSubmit}
-            class="close-button" /* Needs button text */
+            className="close-button" /* Needs button text */
           >
             {" Submit Post"}
           </button>
         </div>
       </div>
+     
     );
   }
 }
