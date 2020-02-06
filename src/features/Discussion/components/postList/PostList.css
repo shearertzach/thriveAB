@@ -35,3 +35,31 @@ li div{
     font-weight:  bold;
     cursor:  pointer;
 }
+
+.postList-postDate {
+    font-size: 12px;
+    padding-bottom: 5px;
+    padding-top: 3px;
+}
+
+.postList-postDescription {
+    font-size: 15px;
+    padding-top: 5px;
+}
+
+.postList-postUser {
+    font-weight: bold
+}
+
+.postList-postTitle {
+    font-weight: bold
+}
+
+.postList {
+    padding-top: 10px;
+}
+
+.postList-fullPost {
+    padding-bottom: 10px;
+}
+
