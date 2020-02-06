@@ -51,10 +51,10 @@ class Survey extends Component {
     }
   }
 
-  handleAnswerPress = (points, index, day) => {
+  handleAnswerPress = (points, index) => {
     const { currentIndex } = this.state
     const savedAnswers = [...this.state.savedAnswers]
-    savedAnswers[currentIndex] = { points, index, day }
+    savedAnswers[currentIndex] = { points, index }
     this.setState({ selectedAnswerIndex: index, savedAnswers })
   }
 
@@ -76,7 +76,7 @@ class Survey extends Component {
             {
               surveyQuestions[currentIndex].answers.map((answer, index) => (
                 <div
-                  onClick={() => this.handleAnswerPress(answer.points, index, today)}
+                  onClick={() => this.handleAnswerPress(answer.points, index)}
                   key={answer.text}
                   className={classnames(style['c-survey__answers__answer'],
                     selectedAnswerIndex === index ? style['c-survey__answers__answer--selected'] : '')}

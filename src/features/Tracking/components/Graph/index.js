@@ -64,11 +64,10 @@ class Graph extends Component {
     } else {
       return (
         <div id='graph' style={{ height: '450px', width: '700px' }}>
-
-          {/* <ResponsiveLine
-            data={graphData}
+          <ResponsiveLine
+            data={this.state.data}
             margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-            xScale={{ type: 'point', min: '1', max: '31', stacked: true, reverse: false }}
+            xyScale={{ type: 'point', min: '1', max: '31', stacked: true, reverse: false }}
             xFormat={function (e) { return "Day of Month: " + e }}
             yScale={{ type: 'linear' }}
             yFormat={function (e) { return "Score: " + e }}
@@ -104,14 +103,8 @@ class Graph extends Component {
             pointLabel='y'
             pointLabelYOffset={-12}
             useMesh={true}
-          /> */}
+          />
           <button onClick={printGraph}>Print Page</button>
-
-          {
-            this.state.data.map((data) => (
-              console.log("hello")
-            ))
-          }
         </div>
       )
     }
