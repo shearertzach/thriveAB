@@ -8,11 +8,28 @@ import Graph from '../../features/Tracking/components/Graph'
 import { PropTypes } from 'prop-types'
 
 class Tracking extends PureComponent {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedTab: 'survey'
+    }
+  }
+
+  handleTabSwitch = (tabName) => {
+    this.setState({ selectedTab: tabName })
+    console.log(tabName)
+  }
+
   renderAuthorized = () => (
     <div>
       <InfoSection extraStyle={style['o-tracker']}>
-        <Survey />
-        <Graph />
+        <div className={style['o-tracker__tabContainer']}>
+          <button onClick={() => this.handleTabSwitch('survey')}>Survey</button>
+          <button onClick={() => this.handleTabSwitch('results')}>Results</button>
+        </div>
+        {this.state.selectedTab === 'survey' ? <Survey /> : null}
+        {this.state.selectedTab === 'results' ? <Graph /> : null}
       </InfoSection>
     </div>
   )

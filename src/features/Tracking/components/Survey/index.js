@@ -65,8 +65,8 @@ class Survey extends Component {
 
     const { currentIndex, selectedAnswerIndex, hasSubmitted } = this.state
 
-    if (hasSubmitted) {
-      return <h2 className={style['c-survey__title']}>Thank you for taking the Survey</h2>
+    if (completedSurvey) {
+      return <h2 className={style['c-survey__title']}>Thank you for taking the Survey! Come back tomorrow!</h2>
     } else if (!completedSurvey) {
       return (
         <div className={style['c-survey']}>

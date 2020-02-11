@@ -3,7 +3,7 @@ import firebase from 'firebase'
 
 const date = new Date()
 const months = ['January', 'February', 'March', 'April', 'May', "June", 'July', 'August', 'September', 'October', 'November', 'December']
-let currentDay = `${months[date.getMonth()]}, ${date.getDate() + 3}`
+let currentDay = `${months[date.getMonth()]}, ${date.getDate()}`
 
 
 export const submitTrackerSurveyData = (surveyData) => (dispatch, getState) => {
@@ -11,7 +11,7 @@ export const submitTrackerSurveyData = (surveyData) => (dispatch, getState) => {
   const { userId } = user
   const db = firebase.firestore()
 
-  surveyData.push(date.getDate() + 3)
+  surveyData.push(date.getDate())
 
   const surveryCollection = db.collection('users').doc(userId).collection('Surveys')
   surveryCollection.doc(`${date.getFullYear()}`).collection(`${date.getMonth() + 1}`).doc(`${currentDay}`).set({ survey: surveyData })

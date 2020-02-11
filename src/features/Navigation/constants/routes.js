@@ -21,8 +21,8 @@ export const routes = [
     component: Support
   },
   {
-    display: 'Discussion',
-    path: '/Discussion',
+    display: 'Community',
+    path: '/community',
     component: Discussion
   }
 ]
